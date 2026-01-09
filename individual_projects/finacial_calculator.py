@@ -9,7 +9,7 @@ def interface():
         if choice == '1':
             savTiCalc()
         elif choice == '2':
-            savTiCalc()
+            comInCalc()
         elif choice == '3':
             insertfuctionhere
         elif choice == '4':
@@ -46,22 +46,44 @@ def savTiCalc():
         else:
             print("Invalid input")
 def comInCalc():
-    print("Welcome to the compund intrest calculator")
-    start_amt = input("What is in the account to start with?")
-    if start_amt.isnumeric == True:
-        start_amt = float(start_amt)
-        intratperc = input("What is the intrest rate percent?")
-        if intratperc.isnumeric == True:
-            intratperc= float(intratperc)
-            years = input("Years spent compounding?")
-            if years.isnumeric == True:
-                for i in range(1,years+1):
-                    start_amt += start_amt*1+intratperc
-                final = start_amt
-                print(f"At the end of {years} years you will have ${final:.2f}")
-                return
-    else:
-        print("invalid")
+    while True:
+        print("Welcome to the compund interest calculator")
+        start_amt = input("What is in the account to start with?\n")
+        if start_amt.isnumeric() == True:
+            start_amt = float(start_amt)
+            intratperc = input("What is the intrest rate percent?\n")
+            if intratperc.isnumeric() == True:
+                intratperc= float(intratperc)
+                years = input("Years spent compounding?\n")
+                if years.isnumeric() == True:
+                    years = int(years)
+                    for i in range(1,years+1):
+                        start_amt = start_amt*(1+(intratperc/100))
+                    final = start_amt
+                    print(f"At the end of {years} years you will have ${final:.2f}")
+                    return
+                else:
+                    print("invalid")
+            else:
+                print("invalid")    
+        else:
+            print("invalid")
+#This function will have an inner to take care of the budget allocation equation
+def budAllo():
+    categories = {
+
+    }
+    print("Welcome to the budget allocater")
+    income = input("What is your monthly income?\n")
+    if income.isnumeric() == True:
+        income = int(income)
+        amount = input("How many categories are you budgeting with?\n")
+        if amount.isnumeric() == True:
+            amount = int(amount)
+            for i in range(1,amount+1):
+                holder = input("Category name: ")
+                percent = input("Category percent: ")
+                categories[f'{holder}'] = percent
 #ask them what function they would like to use (small description in parenthesis)
 interface()
 #Each function of the calculator will have its own code function.
