@@ -90,32 +90,32 @@ def budAllo():
             amount = input("How many categories are you budgeting with?\n")
             if amount.isnumeric() == True:
                 amount = int(amount)
-                for i in range(1,amount+1):
-                    holder = input("Category name: ")
-                    percent = input("Category percent: ")
-                    if percent.isnumeric() == True:
-                        percent = float(percent//100)
-                        categories[f'{holder}'] = percent
-                        key_list = categories.keys
-                        y = False
-                        for key in key_list:
-                            x += key
-                        if x == 100:
-                            y = True
-                        else:
-                            print("You gave more than 100\%\ allocated")
-                        if y == True:
-                            def allocateCalc():
-                                for key in categories.keys():
-                                    categories[key] = round(income*categories[key], 2)
-                                return categories
-                            allocateCalc()
-
-                                
-
-                    else:
-                        print("Invalid")
-                        break
+                def allocateCalc():
+                                while True:
+                                    for i in range(1,amount+1):
+                                        holder = input("Category name: ")
+                                        percent = input("Category percent: ")
+                                        if percent.isnumeric() == True:
+                                            percent = float(percent)/100
+                                            categories[f'{holder}'] = percent
+                                            thing = categories.values()
+                                            y = False
+                                            x = 0
+                                    for z in thing:
+                                            x += z
+                                    if x == 1:
+                                            y = True
+                                    else:
+                                            print("You gave more than 100 allocated")
+                                    if y == True:
+                                            for z in categories.keys():
+                                                categories[z] = round(income*categories[z], 2)
+                                            return categories
+                                    else:
+                                            print("You allocated more than 100%")
+                categories = allocateCalc()
+                print(categories)
+                return
             else:
                 print("Invalid")
         else:
