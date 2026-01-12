@@ -11,7 +11,7 @@ def interface():
         elif choice == '2':
             comInCalc()
         elif choice == '3':
-            insertfuctionhere
+            budAllo()
         elif choice == '4':
             insertfuctionhere
         elif choice == '5':
@@ -21,6 +21,8 @@ def interface():
             sys.exit()
         else:
             print("Invalid choice choose again.")
+            
+#Time saving function
 def savTiCalc():
     while True:
         print("Welcome to the savings time calculator\n")
@@ -45,6 +47,9 @@ def savTiCalc():
                 print("Invalid input")
         else:
             print("Invalid input")
+
+
+#compound interest calculator
 def comInCalc():
     while True:
         print("Welcome to the compund interest calculator")
@@ -68,22 +73,58 @@ def comInCalc():
                 print("invalid")    
         else:
             print("invalid")
+
+
+
+
 #This function will have an inner to take care of the budget allocation equation
 def budAllo():
     categories = {
 
     }
     print("Welcome to the budget allocater")
-    income = input("What is your monthly income?\n")
-    if income.isnumeric() == True:
-        income = int(income)
-        amount = input("How many categories are you budgeting with?\n")
-        if amount.isnumeric() == True:
-            amount = int(amount)
-            for i in range(1,amount+1):
-                holder = input("Category name: ")
-                percent = input("Category percent: ")
-                categories[f'{holder}'] = percent
+    while True:
+        income = input("What is your monthly income?\n")
+        if income.isnumeric() == True:
+            income = int(income)
+            amount = input("How many categories are you budgeting with?\n")
+            if amount.isnumeric() == True:
+                amount = int(amount)
+                for i in range(1,amount+1):
+                    holder = input("Category name: ")
+                    percent = input("Category percent: ")
+                    if percent.isnumeric() == True:
+                        percent = float(percent//100)
+                        categories[f'{holder}'] = percent
+                        key_list = categories.keys
+                        y = False
+                        for key in key_list:
+                            x += key
+                        if x == 100:
+                            y = True
+                        else:
+                            print("You gave more than 100\%\ allocated")
+                        if y == True:
+                            def allocateCalc():
+                                for key in categories.keys():
+                                    categories[key] = round(income*categories[key], 2)
+                                return categories
+                            allocateCalc()
+
+                                
+
+                    else:
+                        print("Invalid")
+                        break
+            else:
+                print("Invalid")
+        else:
+            print("Invalid")
+
+
+
+
+
 #ask them what function they would like to use (small description in parenthesis)
 interface()
 #Each function of the calculator will have its own code function.
