@@ -13,9 +13,9 @@ def interface():
         elif choice == '3':
             budAllo()
         elif choice == '4':
-            insertfuctionhere
+            salePriceCalc()
         elif choice == '5':
-            insertfuctionhere
+            tipCalc()
         elif choice == '6':
             print("Goodbye")
             sys.exit()
@@ -114,7 +114,8 @@ def budAllo():
                                     else:
                                             print("You allocated more than 100%")
                 categories = allocateCalc()
-                print(categories)
+                for i in categories.keys():
+                     print(f"{i} is ${categories[i]}")
                 return
             else:
                 print("Invalid")
@@ -122,9 +123,45 @@ def budAllo():
             print("Invalid")
 
 
+#sale price
+def salePriceCalc():
+    while True:
+        print("Welcome to the sales price calculator.\n")
+        price = input("What is the item price?\n")
+        if price.isnumeric() == True:
+            price = round(float(price), 2)
+            sale = input("What is the sale percent?\n")
+            if sale.isnumeric() == True:
+                sale = int(sale)
+                if sale > 100:
+                     print("You can't have a sale that big.")
+                else:
+                     print(f"Your item is ${(price)-((price/100)*sale)}")
+                     return
+            else:
+                 print("Invalid")
+        else:
+            print("Invalid")
 
 
 
+
+
+#Calculate tips
+def tipCalc():
+     while True:
+        print("Welcome to the tip calculator.\n")
+        bill = input("What is the bill?\n")
+        if bill.isnumeric() == True:
+            percent = input("What is the tip percent?\n")
+            if percent.isnumeric() == True:
+                bill, percent = float(bill), int(percent)
+                print(f"The tip would be ${(bill/100)*percent:.2}")
+                return
+            else:
+                print("Invalid")
+        else:
+            print("Invalid")
 #ask them what function they would like to use (small description in parenthesis)
 interface()
 #Each function of the calculator will have its own code function.
