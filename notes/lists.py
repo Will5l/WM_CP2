@@ -13,7 +13,7 @@ print(x)
 
 
 #set
-colors = {"Orange", "Purple", "Green", "Blue", "Yellow", "Red", "Green"}
+colors = {"Orange", "Purple", "Green", "Blue", "Yellow", "Red", "Green", "Purple"}
 colors.add("Pink")
 colors.remove("Purple")
 for i in colors:
