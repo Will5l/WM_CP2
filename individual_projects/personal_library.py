@@ -7,7 +7,7 @@ def interface():
     #Ask for users name and greet them to the library
     user = input("What is your name?\n")
     print(f"Welcome to your personal library, {user}")
-    books = {"Fablehaven by Brandon Mull"}
+    books = {"Fablehaven by Brandon Mull", "The Hunger Games by Suzzane Collins"}
     while True:
         #Ask them what what they would like to do
         print(f"What would you like to do, {user}?\n")
@@ -29,6 +29,8 @@ def interface():
             print(f"Goodbye, {user}")
             sys.exit()
             pass
+        else:
+            print("Invalid")
 
 #Have a for loop iterate through every book and author, and print them out nicely
 def viewBooks(books):
@@ -36,6 +38,8 @@ def viewBooks(books):
         print(f"{i}\n")
     if books == False:
         print("You have no books")
+
+
 #Make a function that asks for the name and author of the book, before concatenating them and adding them to the set
 def addBooks(books):
     print(f"What book would you like to add?")
@@ -44,13 +48,15 @@ def addBooks(books):
     full_thing = (f"{name} by {author}")
     books.add(full_thing)
     return books
+
+
 #Make a function that asks them to type in the full name of the book and author they wish to remove, and have it print out all the books.
 def removeBooks(books):
     while True:
         again = False
         for i in books:
             print(f"{i}\n")
-        choice = input("Type out the full name and author of the book you wish to remove.\n")
+        choice = input("Type out the full name and author of the book you wish to remove. (Case sensitive)\n")
         if choice in books:
             books.remove(choice)
             return books
@@ -67,6 +73,7 @@ def removeBooks(books):
                 else:
                     print("Invalid choice")
 
+
 #Create a function to search for books by the name given in the list.
 def searchBooks(books):
     search = input("Type in the title/author of the book\n")
@@ -75,6 +82,7 @@ def searchBooks(books):
             print(i)
         else:
             pass
+    return
 
 
 interface()
