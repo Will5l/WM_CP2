@@ -25,6 +25,10 @@ def password_gen():
         lowercase = input("Do you want lowercase letters?y/n\n")
         numbers = input("Do you want numbers?y/n\n")
         special_chars = input("Do you want special characters?y/n\n")
+        uppercase = uppercase.strip().lower()
+        lowercase = lowercase.strip().lower()
+        numbers = numbers.strip().lower()
+        special_chars = special_chars.strip().lower()
         password = ""
         password_count = 1
         if lowercase != "y" and uppercase != "y" and numbers != "y" and special_chars != "y":
@@ -41,45 +45,54 @@ def password_gen():
         #Have two while loops, one for the passwords length, and one to ensure 4 passwords are made
         #After the password is done being made, it will be printed and then a new one will start being made
         while len(password) < length:
+            upper = False
+            lower = False
+            num = False
+            special = False
             rng = random.randint(1,4)
             if rng == 1 and uppercase == "y":
-                password = upper(password)
+                upper = True
+                password,upper,lower,num,special = generator(password, upper,lower,num,special)
             if rng == 2 and lowercase == "y":
-                password = lower(password)
-            if rng == 3 and numbers == "y":
-                password = number(password)
+                lower = True
+                password,upper,lower,num,special = generator(password, upper,lower,num,special)
+                num = True
+                password,upper,lower,num,special = generator(password, upper,lower,num,special)
             if rng == 4 and special_chars == "y":
-                password = special(password)
+                special = True
+                password,upper,lower,num,special = generator(password, upper,lower,num,special)
                 #when the length is met, it is printed out and the password count is increased by 1.
         print(f"{password_count}.{password}")
         password_count += 1
                         
 #Each of the four functions will have a random variable to select an option from  the list, and then append the password, before returning it
-def upper(password):
-    x = random.randint(0,25)
-    uppercase_letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-    y = uppercase_letters[x]
-    password += y
-    return password
-
-def lower(password):
-    x = random.randint(0,25)
-    lowercase_letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    y = lowercase_letters[x]
-    password += y
-    return password
-
-def number(password):
-    x = random.randint(0,9)
-    numbers = ['1','2','3','4','5','6','7','8','9','0']
-    y = numbers[x]
-    password += y
-    return password
-
-def special(password):
-    x = random.randint(0,6)
-    special_characters = ['!','@','#','$','%','&','?']
-    y = special_characters[x]
-    password += y
-    return password
+def generator(password, u, l, n, s):
+    if u == True:
+        x = random.randint(0,25)
+        uppercase_letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+        y = uppercase_letters[x]
+        password += y
+        u, l, n, s = False,False,False,False
+        return password, u, l, n, s
+    elif l == True:
+        x = random.randint(0,25)
+        lowercase_letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        y = lowercase_letters[x]
+        password += y
+        u, l, n, s = False,False,False,False
+        return password, u, l, n, s
+    elif n == True:
+        x = random.randint(0,9)
+        numbers = ['1','2','3','4','5','6','7','8','9','0']
+        y = numbers[x]
+        password += y
+        u, l, n, s = False,False,False,False
+        return password, u, l, n, s
+    elif s == True:
+        x = random.randint(0,6)
+        special_characters = ['!','@','#','$','%','&','?']
+        y = special_characters[x]
+        password += y
+        u, l, n, s = False,False,False,False
+        return password, u, l, n, s
 main()
