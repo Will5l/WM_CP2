@@ -41,7 +41,24 @@ def all_m_display():
 
 #Have if else statments that check if the input is in the requested filter, and do it twice if they choose two. if it is length, ask for shorter or longer than a certain time and compare them. Then use the same code as in the last function to print them
 def filter_movies():
-    pass
+    categories = {
+        '1':"Title",
+        '2':"Director",
+        '3':"Genre",
+        '4':"Rating",
+        '5':"Length (min)",
+        '6':"Actors"
+    }
+    while True:
+        print("Choose the filters")
+        amount = input("1 or 2 filters?\n")
+        if amount == '1':
+            filter_1 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\nq6.Actors")
+            if filter_1 in categories and filter_1 != '5':
+                search = input("Input your search\n")
+            elif filter_1 == "5":
+                pass
+        pass
 
 
 main()
