@@ -49,16 +49,94 @@ def filter_movies():
         '5':"Length (min)",
         '6':"Actors"
     }
-    while True:
-        print("Choose the filters")
-        amount = input("1 or 2 filters?\n")
-        if amount == '1':
-            filter_1 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\nq6.Actors")
-            if filter_1 in categories and filter_1 != '5':
-                search = input("Input your search\n")
-            elif filter_1 == "5":
-                pass
-        pass
+    try:
+        with open('individual_projects/Movies list.csv', mode = 'r') as csv_file:
+            content = csv.reader(csv_file)
+            headers = next(content)
+            rows = []
+            for line in content:
+                rows.append({headers[0]: line[0], headers[1]: line[1], headers[2]: line[2], headers[3]: line[3], headers[4]: line[4], headers[5]: line[5]})
+    except:
+        print("Can't find the file")
+    else:
+        while True:
+            print("Choose the filters")
+            amount = input("1 or 2 filters?\n")
+            if amount == '1':
+                filter_1 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\n6.Actors\n")
+                if filter_1 in categories and filter_1 != '5':
+                    search = input("Input your search\n")
+                    for line in rows:
+                        if search in line[categories[filter_1]]:
+                            print(line)
+                    choice = input("Would you like to search with filters again?y/n\n")
+                    choice = choice.strip().lower()
+                    if choice == "y":
+                        continue
+                    else:
+                        return
+                elif filter_1 == "5":
+                    x = input("1.Longer than\n2.Shorter than\n")
+                    while True:
+                            length = input("Time in minutes: ")
+                            if length.isnumeric() == True:
+                                length = int(length)
+                                break
+                            else:
+                                print("only use numbers")
+                    for line in rows:
+                        if x == '1':
+                            if length < int(line[categories['5']]):
+                                print(line)
+                        elif x == '2':
+                            if length > int(line[categories['5']]):
+                                print(line)
+                    choice = input("Would you like to search with filters again?y/n\n")
+                    choice = choice.strip().lower()
+                    if choice == "y":
+                        continue
+                    else:
+                        return
+                else:
+                    print("Invalid")
 
+            elif amount == '2':
+                filter_1 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\n6.Actors\n")
+                filter_2 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\n6.Actors\n")
+                if filter_1 in categories and filter_2 in categories:
+                    search = input("Input your search\n")
+                    for line in rows:
+                        if search in line[categories[filter_1]]:
+                            print(line)
+                    choice = input("Would you like to search with filters again?y/n\n")
+                    choice = choice.strip().lower()
+                    if choice == "y":
+                        continue
+                    else:
+                        return
+                elif filter_1 == "5":
+                    x = input("1.Longer than\n2.Shorter than\n")
+                    while True:
+                            length = input("Time in minutes: ")
+                            if length.isnumeric() == True:
+                                length = int(length)
+                                break
+                            else:
+                                print("only use numbers")
+                    for line in rows:
+                        if x == '1':
+                            if length < int(line[categories['5']]):
+                                print(line)
+                        elif x == '2':
+                            if length > int(line[categories['5']]):
+                                print(line)
+                    choice = input("Would you like to search with filters again?y/n\n")
+                    choice = choice.strip().lower()
+                    if choice == "y":
+                        continue
+                    else:
+                        return
+                else:
+                    print("Invalid")
 
 main()
