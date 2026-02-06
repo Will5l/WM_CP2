@@ -37,7 +37,7 @@ def all_m_display():
             print(f"Genre:{line['Genre']}")
             print(f"Rating:{line['Rating']}")
             print(f"Length (min):{line['Length (min)']}")
-            print(f"Actors:{line['Notable Actors']}")
+            print(f"Actors:{line['Notable Actors']}\n")
 
 #Have if else statments that check if the input is in the requested filter, and do it twice if they choose two. if it is length, ask for shorter or longer than a certain time and compare them. Then use the same code as in the last function to print them
 def filter_movies():
@@ -68,7 +68,12 @@ def filter_movies():
                     search = input("Input your search\n")
                     for line in rows:
                         if search in line[categories[filter_1]]:
-                            print(line)
+                            print(f"Title:{line['Title']}")
+                            print(f"Director:{line['Director']}")
+                            print(f"Genre:{line['Genre']}")
+                            print(f"Rating:{line['Rating']}")
+                            print(f"Length (min):{line['Length (min)']}")
+                            print(f"Actors:{line['Notable Actors']}\n")
                     choice = input("Would you like to search with filters again?y/n\n")
                     choice = choice.strip().lower()
                     if choice == "y":
@@ -87,10 +92,20 @@ def filter_movies():
                     for line in rows:
                         if x == '1':
                             if length < int(line[categories['5']]):
-                                print(line)
+                                print(f"Title:{line['Title']}")
+                                print(f"Director:{line['Director']}")
+                                print(f"Genre:{line['Genre']}")
+                                print(f"Rating:{line['Rating']}")
+                                print(f"Length (min):{line['Length (min)']}")
+                                print(f"Actors:{line['Notable Actors']}\n")
                         elif x == '2':
                             if length > int(line[categories['5']]):
-                                print(line)
+                                print(f"Title:{line['Title']}")
+                                print(f"Director:{line['Director']}")
+                                print(f"Genre:{line['Genre']}")
+                                print(f"Rating:{line['Rating']}")
+                                print(f"Length (min):{line['Length (min)']}")
+                                print(f"Actors:{line['Notable Actors']}\n")
                     choice = input("Would you like to search with filters again?y/n\n")
                     choice = choice.strip().lower()
                     if choice == "y":
@@ -103,18 +118,24 @@ def filter_movies():
             elif amount == '2':
                 filter_1 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\n6.Actors\n")
                 filter_2 = input("Which category?\n1.Title\n2.Director\n3.Genre\n4.Rating\n5.Length\n6.Actors\n")
-                if filter_1 in categories and filter_2 in categories:
-                    search = input("Input your search\n")
+                if filter_1 in categories and filter_2 in categories and filter_1 != '5' and filter_2 != '5':
+                    search1 = input("Input your first search\n")
+                    search2 = input("Input your second search\n")
                     for line in rows:
-                        if search in line[categories[filter_1]]:
-                            print(line)
+                        if search1 in line[categories[filter_1]] and search2 in line[categories[filter_2]]:
+                            print(f"Title:{line['Title']}")
+                            print(f"Director:{line['Director']}")
+                            print(f"Genre:{line['Genre']}")
+                            print(f"Rating:{line['Rating']}")
+                            print(f"Length (min):{line['Length (min)']}")
+                            print(f"Actors:{line['Notable Actors']}\n")
                     choice = input("Would you like to search with filters again?y/n\n")
                     choice = choice.strip().lower()
                     if choice == "y":
                         continue
                     else:
                         return
-                elif filter_1 == "5":
+                elif filter_1 == "5" and filter_2 in categories and filter_2 != '5':
                     x = input("1.Longer than\n2.Shorter than\n")
                     while True:
                             length = input("Time in minutes: ")
@@ -123,13 +144,57 @@ def filter_movies():
                                 break
                             else:
                                 print("only use numbers")
+                    y = input("Type the other search\n")
                     for line in rows:
                         if x == '1':
-                            if length < int(line[categories['5']]):
-                                print(line)
+                            if length < int(line[categories['5']]) and y in line[categories[filter_2]]:
+                                print(f"Title:{line['Title']}")
+                                print(f"Director:{line['Director']}")
+                                print(f"Genre:{line['Genre']}")
+                                print(f"Rating:{line['Rating']}")
+                                print(f"Length (min):{line['Length (min)']}")
+                                print(f"Actors:{line['Notable Actors']}\n")
                         elif x == '2':
-                            if length > int(line[categories['5']]):
-                                print(line)
+                            if length > int(line[categories['5']]) and y in line[categories[filter_2]]:
+                                print(f"Title:{line['Title']}")
+                                print(f"Director:{line['Director']}")
+                                print(f"Genre:{line['Genre']}")
+                                print(f"Rating:{line['Rating']}")
+                                print(f"Length (min):{line['Length (min)']}")
+                                print(f"Actors:{line['Notable Actors']}\n")
+                    choice = input("Would you like to search with filters again?y/n\n")
+                    choice = choice.strip().lower()
+                    if choice == "y":
+                        continue
+                    else:
+                        return
+                elif filter_2 == '5' and filter_1 in categories and filter_1 != '5':
+                    x = input("1.Longer than\n2.Shorter than\n")
+                    while True:
+                            length = input("Time in minutes: ")
+                            if length.isnumeric() == True:
+                                length = int(length)
+                                break
+                            else:
+                                print("only use numbers")
+                    y = input("Type the other search\n")
+                    for line in rows:
+                        if x == '1':
+                            if length < int(line[categories['5']]) and y in line[categories[filter_1]]:
+                                print(f"Title:{line['Title']}")
+                                print(f"Director:{line['Director']}")
+                                print(f"Genre:{line['Genre']}")
+                                print(f"Rating:{line['Rating']}")
+                                print(f"Length (min):{line['Length (min)']}")
+                                print(f"Actors:{line['Notable Actors']}\n")
+                        elif x == '2':
+                            if length > int(line[categories['5']]) and y in line[categories[filter_1]]:
+                                print(f"Title:{line['Title']}")
+                                print(f"Director:{line['Director']}")
+                                print(f"Genre:{line['Genre']}")
+                                print(f"Rating:{line['Rating']}")
+                                print(f"Length (min):{line['Length (min)']}")
+                                print(f"Actors:{line['Notable Actors']}\n")
                     choice = input("Would you like to search with filters again?y/n\n")
                     choice = choice.strip().lower()
                     if choice == "y":
