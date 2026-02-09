@@ -1,2 +1,1 @@
-    content = file.read()
-        print(content)
+Orange
