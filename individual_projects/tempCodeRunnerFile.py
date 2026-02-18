@@ -1,5 +1,1 @@
-    print(f"Director:{line['Director']}")
-                                print(f"Genre:{line['Genre']}")
-                                print(f"Rating:{line['Rating']}")
-                                print(f"Length (min):{line['Length (min)']}")
-                                print(f"Actors:{line['Notable Actors']}")
+individual_projects/library.csv
