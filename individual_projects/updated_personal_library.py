@@ -6,14 +6,13 @@ import sys
 def interface():
     #greet them to the library
     print(f"Welcome to your personal library")
-    books = []
+    books = list([])
     try:
-        thing="individual_projects/library.csv"
-        with open(thing, mode = 'r') as csv_file:
+        with open('individual_projects/library.csv', mode = 'r') as csv_file:
             content = csv.reader(csv_file)
             headers = next(content)
             for line in content:
-                books.append({headers[0]: line[0], headers[1]: line[1], headers[2]: line[2], headers[3]: line[3]})
+                books.append({headers[0]: line[0], headers[1]: line[1], headers[2]: line[2], headers[3]: line[3]},)
     except:
         print("Can't find the file")
     else:
@@ -36,12 +35,16 @@ def interface():
                 searchBooks(books)
                 pass
             elif choice == '5':
-                with open('individual_projects/library.csv', 'r+', newline = '') as csv_file:
+                with open('individual_projects/library.csv', 'w', newline = '') as csv_file:
                     fieldnames = ['Title', 'Author', 'Genre', 'Year']
                     reader = csv.reader(csv_file)
                     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                     #writer.writeheader()
                     x = 0
+                    writer.writerow({'Title': 'Title',
+                                         'Author':'Author',
+                                         'Genre': 'Genre',
+                                         'Year': 'Year'})
                     while x < len(books):
                         writer.writerow({'Title': books[x]['Title'],
                                          'Author': books[x]['Author'],
@@ -57,6 +60,7 @@ def interface():
 #Have a for loop iterate through every book and author, and print them out nicely
 def viewBooks(books):
     x = 0
+    books = list(books)
     for book in books:
         print(f"Title:{books[x]['Title']}")
         print(f"Author:{books[x]['Author']}")
@@ -71,41 +75,42 @@ def addBooks(books):
     author = input("Who is the author?\n")
     genre = input("Whats the genre?\n")
     year = input("What year was it released?\n")
-    books.append({name,author,genre,year})
+    books.append({'Title':name,'Author':author,'Genre':genre,'Year':year})
     return books
 
 
 #Make a function that asks them to type in the full name of the book and author they wish to remove, and have it print out all the books.
 def removeBooks(books):
-    while True:
-        again = False
-        for i in books:
-            print(f"{i}\n")
-        choice = input("Type out the full name and author of the book you wish to remove. (Case sensitive)\n")
-        if choice in books:
-            books.remove(choice)
+    x=0
+    for book in books:
+        print(f"Title:{books[x]['Title']}")
+        print(f"Author:{books[x]['Author']}")
+        print(f"Genre:{books[x]['Genre']}")
+        print(f"Year:{books[x]['Year']}")
+        x+=1
+    choice = input("Type out the full name of the book you wish to remove. (Case sensitive)\n")
+    x = 0
+    for book in books:
+        if choice in book['Title']:
+            del books[x]
             return books
-        else:
-            #if something goes wrong have it ask if they want to try again or go back to the menu
-            while again == False:
-                again = input("something went wrong, would you like to try again, or go back to the menu?y/n\n")
-                if again == "y":
-                    again = True
-                    continue
-                elif again == "n":
-                    again = False
-                    return books
-                else:
-                    print("Invalid choice")
+        x+=1
+    print("No books matched")
 
 
 #Create a function to search for books by the name given in the list.
 def searchBooks(books):
-    search = input("Type in the title/author of the book\n")
-    for i in books:
-        if search in i:
-            print(i)
+    search = input("Type in the title of the book(case sensitive)\n")
+    x = -1
+    for book in books:
+        x+=1
+        if search in books[x]['Title']:
+            print(f"Title:{books[x]['Title']}")
+            print(f"Author:{books[x]['Author']}")
+            print(f"Genre:{books[x]['Genre']}")
+            print(f"Year:{books[x]['Year']}")
         else:
+            print("No books matched your search")
             pass
     return
 
