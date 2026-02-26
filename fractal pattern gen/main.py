@@ -8,6 +8,7 @@ def main():
     #ask them them how many times they want it to repeat, and use a list to see if they chose an option that was available
     depth = input("How many times would you like the fractal to repeat? 1-5\n")
     if depth in depth_list:
+        depth = int(depth)
         #Ask them what color they want it to be
         color = input("What color would you like it to be? (purple, blue, green ect.)\n")
         bgcolor = input("What color do you want the background?\n")
