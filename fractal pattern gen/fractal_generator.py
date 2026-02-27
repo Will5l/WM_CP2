@@ -2,51 +2,42 @@ import turtle as t
 
 
 
-def fractals(d,fpo,spo,thpo,ft,fp,sp,thp,fps,sps,thps):
+def fractals(d,f,turn,t1,t2,t3):
     t.speed("fast")
     if d == 1:
         return
-    if ft == True:
-        fp[0] = (fpo[0]+spo[0])/2
-        fp[1] = (fpo[1]+spo[1])/2
-        sp[0] = (spo[0]+thpo[0])/2
-        sp[1] = (spo[1]+thpo[1])/2
-        thp[0] = (thpo[0]+fpo[0])/2
-        thp[1] = (thpo[1]+fpo[1])/2
-        t.penup()
-        t.goto(fp)
-        t.pendown()
-        t.goto(sp)
-        t.goto(thp)
-        t.goto(fp)
-        ft = False
-        return fractals(d-1,fpo,spo,thpo,ft,fp,sp,thp,fps,sps,thps)
     else:
-        t.penup()
-        thps[0] = (fpo[0]+thp[0])/2
-        thps[1] = (fpo[1]+thp[1])/2
-        fps[0] = (fp[0]+fpo[0])/2
-        fps[1] = (fp[1]+fpo[1])/2
-        sps[0] = (sp[0]+fpo[0])/2
-        sps[1] = (sp[1]+fpo[1])/2
-        t.goto(fps)
-        t.pendown()
-        t.goto(sps)
-        t.goto(thps)
-        t.goto(fps)
-        t.penup()
-        thps[0] = (spo[0]+fp[0])/2
-        thps[1] = (spo[1]+fp[1])/2
-        fps[0] = (spo[0]+sp[0])/2
-        fps[1] = (spo[1]+sp[1])/2
-        sps[0] = (sp[0]+fp[0])/2
-        sps[1] = (sp[1]+fp[1])/2
-        t.goto(thps)
-        t.pendown()
-        t.goto(fps)
-        t.goto(sps)
-        t.goto(thps)
-        return fractals(d-1,fpo,spo,thpo,ft,fps,sps,thps,fp,sp,thp)
+        #Have the turtle move forward a decreasing amount so it can make the triangles at the right distance
+        #Turtle one
+        t1.forward(f)
+        t1.right(60)
+        t1.forward(f)
+        t1.right(turn)
+        t1.forward(f)
+        t1.right(turn)
+        t1.forward(f)
+        t1.right(60)
+        
+        #Turtle two
+        t2.forward(f)
+        t2.right(60)
+        t2.forward(f)
+        t2.right(turn)
+        t2.forward(f)
+        t2.right(turn)
+        t2.forward(f)
+        t2.right(60)
+
+        #Turtle three
+        t3.forward(f)
+        t3.right(60)
+        t3.forward(f)
+        t3.right(turn)
+        t3.forward(f)
+        t3.right(turn)
+        t3.forward(f)
+        t3.right(60)
+        return fractals(d-1,f/2,turn,t1,t2,t3)
         pass
 
 
@@ -54,37 +45,64 @@ def fractals(d,fpo,spo,thpo,ft,fp,sp,thp,fps,sps,thps):
 
 def generator(depth,color,bg):
     t.speed("fast")
+    t1 = t.Turtle()
+    t2 = t.Turtle()
+    t3 = t.Turtle()
+
+    t1.speed("fast")
+    t2.speed("fast")
+    t3.speed("fast")
+
     #Start the function by setting up the turtle so it can draw the shape.
     t.Screen
     try:
         t.color(color)
         t.bgcolor(bg)
+        t1.color(color)
+        t2.color(color)
+        t3.color(color)
     except:
         print("One of the inputed colors wasn't valid, so default colors were set")
         t.color("Black")
+        t1.color("Black")
+        t2.color("Black")
+        t3.color("Black")
         t.bgcolor("White")
+
     t.penup()
     t.title("Fractal")
     t.hideturtle()
-    #The turtle will always have 3 points that it goes to to begin with, that being -500 -500, 0 370, and 500 -500
-    first_point = [-500,-500]
-    second_point = [0,370]
-    third_point = [500,-500]
-    #Use a series of cordinate points to create the triangles
-    fp = [0,0]
-    sp = [0,0]
-    thp = [0,0]
-    fps = [0,0]
-    sps = [0,0]
-    thps = [0,0]
-    t.goto(first_point)
-    t.pendown()
-    t.goto(second_point)
-    t.goto(third_point)
-    t.goto(first_point)
-    first_try = True
-    fractals(depth,first_point,second_point,third_point,first_try,fp,sp,thp,fps,sps,thps)
+    #The turtle will always start in one place, and then got 1000, turn to make the triangles angle, but there will be three, who will all do the same thing, so that they can do it with less looping
+    forward = 800
+    turn = 120
+    #Turtle one movement
+    #t1.hideturtle()
+    #t2.hideturtle()
+    #t3.hideturtle()
 
+    t1.penup()
+    t1.goto(-400,-400)
+    t1.pendown()
+    t1.left(60)
+    t1.forward(forward)
+
+    #Turtle two movement
+    t2.penup()
+    t2.goto(t1.position())
+    t2.pendown()
+    t2.right(60)
+    t2.forward(forward)
+    
+    #Turtle three movement
+    t3.penup()
+    t3.goto(t2.pos())
+    t3.pendown()
+    t3.right(180)
+    t3.forward(forward)
+    t3.right(turn)
+    t2.right(turn)
+    t1.right(turn)
+    fractals(depth,forward/2,turn,t1,t2,t3)
     t.done()
     pass
-generator(4,'red','white')
+generator(5,'red','white')
