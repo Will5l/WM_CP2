@@ -76,14 +76,10 @@ def generator(depth,color,bg):
 
     t.penup()
     t.title("Fractal")
-    #t.hideturtle()
-    #The turtle will always start in one place, and then got 1000, turn to make the triangles angle, but there will be three, who will all do the same thing, so that they can do it with less looping
+    t.hideturtle()
+    #The turtle will always start in one place, and then got 1000, turn to make the triangles angle
     forward = 800
     turn = 120
-    #Turtle one movement
-    #t1.hideturtle()
-    #t2.hideturtle()
-    #t3.hideturtle()
 
     t.penup()
     t.goto(-400,-400)
@@ -110,4 +106,4 @@ def generator(depth,color,bg):
     fractals(depth,forward/2,turn,t,point1,point2,point3)
     t.done()
     pass
-generator(3,'red','white')
+generator(5,'red','white')
