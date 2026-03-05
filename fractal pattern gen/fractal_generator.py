@@ -106,4 +106,3 @@ def generator(depth,color,bg):
     fractals(depth,forward/2,turn,t,point1,point2,point3)
     t.done()
     pass
-generator(5,'red','white')
