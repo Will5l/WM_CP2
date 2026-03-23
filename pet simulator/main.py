@@ -1,5 +1,6 @@
 # WM Pet Simulator
 import sys
+from helpers import *
 # main will greet them, and then give them all the options. none of them will work until they select a pet to be their main one, or create one if they have none
 def main():
     print("Welcome user, this program will simulate pets")
