@@ -11,6 +11,12 @@ def random_event(healthy,lucky,name):
         if x >= 75 and healthy != True:
             print(f"{name} got very sick")
             return -20, -40, 0
+        
+
+
+    
+
+
 
 def select_pet():
     try:
@@ -40,9 +46,10 @@ def select_pet():
                 num = i
                 break
         pet_object = Animal(rows[f'{num}'])
+        return pet_object
 
 
-    class Animal:
+class Animal:
         def __init__(self, name, species, age, hunger, happiness, energy, health, healthy, lucky, lvl, xp):
             self.name = name.capitalize()
             self.species = species.capitalize()
@@ -127,3 +134,40 @@ def select_pet():
             #Function to clear a pet after it dies
             def death(self):
                 pass
+
+
+def create_pet():
+    name = input("What is the pets name?\n")
+    while True:
+        species = input("What species?\n1.Dog\n2.Cat\n3.Fish\n4.Hampster\n5.Bird")
+        if species == '1':
+            species = "Dog"
+            break
+        elif species == '2':
+            species = "Cat"
+            break
+        elif species == '3':
+            species = "Fish"
+            break
+        elif species == '4':
+            species = "Hampster"
+            break
+        elif species == '5':
+            species = "Bird"
+            break
+        else:
+            print("Invalid species selection. Try again")
+    while True:
+        skill1 = False
+        skill2 = False
+        skill = input("do you want your pet to be: 1. Lucky(always triggers random events), or 2. Healthy(never gets the sick event)")
+        if skill == '1':
+            skill1 = True
+            break
+        if skill == '2':
+            skill2 = True
+            break
+        else:
+            print("Invalid selection")
+    pet = Animal(name,species,0,100,100,100,100,skill2,skill1,0,0)
+    return pet
