@@ -12,9 +12,29 @@ def random_event(healthy,lucky,name):
             print(f"{name} got very sick")
             return -20, -40, 0
         
-
-
+# Save data of pet
+def save_pet_data(pet):
+    with open('pet simulator\pets.csv', 'a', newline = '') as csv_file:
+                    fieldnames = ['Name', 'Species', 'Age(years)', 'Hunger', 'Happiness', 'Energy', 'Health', 'Healthy', 'Lucky', 'lvl', 'xp']
+                    reader = csv.reader(csv_file)
+                    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                    #writer.writeheader()
+                    x = 0
+                    writer.writerow({'Name': pet.name,
+                                         'Species':pet.species,
+                                         'Age(Years)': pet.age,
+                                         'Hunger': pet.hunger,
+                                         'Happiness': pet.happiness,
+                                         'Energy':pet.energy,
+                                         'Health': pet.health,
+                                         'Healthy': pet.healthy,
+                                         'Lucky': pet.lucky,
+                                         'lvl': pet.lvl,
+                                         'xp': pet.xp,
+                                         })
     
+# Function to remove pet in case of death or choosing removal
+def remove_pet():
 
 
 
@@ -133,9 +153,12 @@ class Animal:
                     self.health = 0
             #Function to clear a pet after it dies
             def death(self):
+                print(f"{self.name} died :<")
+                remove_pet()
+                pet = None
                 pass
 
-
+#Function to create a new pet
 def create_pet():
     name = input("What is the pets name?\n")
     while True:
