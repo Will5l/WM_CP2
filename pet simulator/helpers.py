@@ -1,6 +1,5 @@
 import csv
 import random
-import pandas
 
 # Have random events for finding treat, or getting sick that skills affect
 def random_event(healthy,lucky,name):
@@ -26,7 +25,7 @@ def save_pet_data(pet):
                     x = 0
                     writer.writerow({'Name': pet.name,
                                          'Species':pet.species,
-                                         'Age(Years)': pet.age,
+                                         'Age(years)': pet.age,
                                          'Hunger': pet.hunger,
                                          'Happiness': pet.happiness,
                                          'Energy':pet.energy,
@@ -59,7 +58,7 @@ def remove_pet(pet):
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writerow({'Name': pet.name,
                                          'Species':pet.species,
-                                         'Age(Years)': pet.age,
+                                         'Age(years)': pet.age,
                                          'Hunger': pet.hunger,
                                          'Happiness': pet.happiness,
                                          'Energy':pet.energy,
@@ -119,7 +118,7 @@ class Animal:
             self.happinesstem, self.healthtem, self.xptem = 0, 0, 0
             # When printed, the object will print all the data related to it
         def display(self):
-                return (f"""Name = {self.name}\nSpecies = {self.species}\nAge = {self.age}\nHunger = {self.hunger}%\nHappiness = {self.happiness}%\nEnergy = {self.energy}%\nHealth = {self.health}%\nLevel = {self.lvl}\nHealthy = {self.s1}\nLucky = {self.s2}""")
+                print(f"""Name = {self.name}\nSpecies = {self.species}\nAge = {self.age}\nHunger = {self.hunger}%\nHappiness = {self.happiness}%\nEnergy = {self.energy}%\nHealth = {self.health}%\nLevel = {self.lvl}\nHealthy = {self.s1}\nLucky = {self.s2}""")
             # Function for feeding
         def feed(self, food_hunger, food_happiness):
                 self.hunger += food_hunger
@@ -132,6 +131,10 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
+                if self.hunger >100:
+                    self.hunger = 100
+                if self.happiness > 100:
+                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             # Function for playing with pet
@@ -152,6 +155,10 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
+                if self.hunger >100:
+                    self.hunger = 100
+                if self.happiness > 100:
+                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             # Function for sleeping
@@ -166,6 +173,10 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
+                if self.hunger >100:
+                    self.hunger = 100
+                if self.happiness > 100:
+                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             #Function for going to the vet
@@ -183,6 +194,10 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
+                if self.hunger >100:
+                    self.hunger = 100
+                if self.happiness > 100:
+                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             #Function to clear a pet after it dies
@@ -201,14 +216,16 @@ class Animal:
                     self.death()
                 if self.hunger == 0:
                     self.health -= 10
+                else:
+                    self.hunger -= 10
                 if self.happiness == 0:
                     self.health -= 10
+                else:
+                    self.happiness -= 10
                 if self.energy == 0:
                     self.health -= 10
-                self.happinesstem, self.healthtem, self.xptem = random_event(self.s1,self.s2,self.name)
-                self.happiness += self.happinesstem
-                self.health += self.healthtem
-                self.xp += self.xptem
+                else:
+                    self.energy -= 10
                 if self.health < 0:
                     self.health = 0
 
@@ -217,7 +234,7 @@ class Animal:
 def create_pet():
     name = input("What is the pets name?\n")
     while True:
-        species = input("What species?\n1.Dog\n2.Cat\n3.Fish\n4.Hampster\n5.Bird")
+        species = input("What species?\n1.Dog\n2.Cat\n3.Fish\n4.Hampster\n5.Bird\n")
         if species == '1':
             species = "Dog"
             break

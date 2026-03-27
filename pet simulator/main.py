@@ -88,6 +88,8 @@ def main():
                         print("Invalid")
             elif choice == '6':
                 print("Goodbye")
+                remove_pet(pet)
+                save_pet_data(pet)
                 sys.exit()
             else:
                 print("Invalid input")
