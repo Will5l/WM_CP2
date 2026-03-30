@@ -49,6 +49,21 @@ def remove_pet(pet):
     except:
         print("Can't find the file")
     else:
+        fieldnames = ['Name', 'Species', 'Age(years)', 'Hunger', 'Happiness', 'Energy', 'Health', 'Healthy', 'Lucky', 'lvl', 'xp']
+        reader = csv.reader(csv_file)
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writerow({'Name': {0['Name']},
+                                         'Species':{rows[0]['Species']},
+                                         'Age(years)':{rows[0]['Age(years)']},
+                                         'Hunger': {rows[0]['Hunger']},
+                                         'Happiness': {rows[0]['Happiness']},
+                                         'Energy':{rows[0]['Energy']},
+                                         'Health': {rows[0]['Health']},
+                                         'Healthy': {rows[0]['Healthy']},
+                                         'Lucky': {rows[0]['Lucky']},
+                                         'lvl': {rows[0]['lvl']},
+                                         'xp': {rows[0]['xp']},
+                                         })
         for line in rows:
             if pet.name in line:
                 continue
@@ -56,17 +71,17 @@ def remove_pet(pet):
                 fieldnames = ['Name', 'Species', 'Age(years)', 'Hunger', 'Happiness', 'Energy', 'Health', 'Healthy', 'Lucky', 'lvl', 'xp']
                 reader = csv.reader(csv_file)
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-                writer.writerow({'Name': pet.name,
-                                         'Species':pet.species,
-                                         'Age(years)': pet.age,
-                                         'Hunger': pet.hunger,
-                                         'Happiness': pet.happiness,
-                                         'Energy':pet.energy,
-                                         'Health': pet.health,
-                                         'Healthy': pet.s1,
-                                         'Lucky': pet.s2,
-                                         'lvl': pet.lvl,
-                                         'xp': pet.xp,
+                writer.writerow({'Name': {line['Name']},
+                                         'Species':{line['Species']},
+                                         'Age(years)':{line['Age(years)']},
+                                         'Hunger': {line['Hunger']},
+                                         'Happiness': {line['Happiness']},
+                                         'Energy':{line['Energy']},
+                                         'Health': {line['Health']},
+                                         'Healthy': {line['Healthy']},
+                                         'Lucky': {line['Lucky']},
+                                         'lvl': {line['lvl']},
+                                         'xp': {line['xp']},
                                          })
 
 
@@ -93,11 +108,11 @@ def select_pet():
             print(f"Level:{line['lvl']}")
     choice = input("Which pet would you like to set as main?(enter the name exactly): ")
     if choice in line['Name']:
+        num = 0
         for i, sublist in enumerate(rows):
+            num += 1
             if choice in sublist:
-                num = i
                 break
-        num = i
         pet_object = Animal(rows[num]['Name'],rows[num]['Species'],rows[num]['Age(years)'],rows[num]['Hunger'],rows[num]['Happiness'],rows[num]['Energy'],rows[num]['Health'],rows[num]['Healthy'],rows[num]['Lucky'],rows[num]['lvl'],rows[num]['xp'])
         return pet_object
 

@@ -69,12 +69,10 @@ def main():
                 while True:
                     choice = input("1.Change pet\n2.Create new pet\n3.Release current pet\n4.Cancel\n")
                     if choice == '1':
-                        remove_pet(pet)
                         save_pet_data(pet)
                         pet = select_pet()
                         break
                     elif choice == '2':
-                        remove_pet(pet)
                         save_pet_data(pet)
                         pet = create_pet()
                         break
