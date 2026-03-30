@@ -6,8 +6,10 @@ class Character:
         self.attack = attack
         self.defense = defense
         pass
-
-
+    
+    def attack(self,edef,ehealth):
+        atk = (self.attack - edef)
+    
 
 class Game:
     def __init__(self):
