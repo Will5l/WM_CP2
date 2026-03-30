@@ -25,7 +25,7 @@ def save_pet_data(pet):
                     x = 0
                     writer.writerow({'Name': pet.name,
                                          'Species':pet.species,
-                                         'Age(years)': pet.age,
+                                         'Age(Years)': pet.age,
                                          'Hunger': pet.hunger,
                                          'Happiness': pet.happiness,
                                          'Energy':pet.energy,
@@ -49,21 +49,6 @@ def remove_pet(pet):
     except:
         print("Can't find the file")
     else:
-        fieldnames = ['Name', 'Species', 'Age(years)', 'Hunger', 'Happiness', 'Energy', 'Health', 'Healthy', 'Lucky', 'lvl', 'xp']
-        reader = csv.reader(csv_file)
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writerow({'Name': {0['Name']},
-                                         'Species':{rows[0]['Species']},
-                                         'Age(years)':{rows[0]['Age(years)']},
-                                         'Hunger': {rows[0]['Hunger']},
-                                         'Happiness': {rows[0]['Happiness']},
-                                         'Energy':{rows[0]['Energy']},
-                                         'Health': {rows[0]['Health']},
-                                         'Healthy': {rows[0]['Healthy']},
-                                         'Lucky': {rows[0]['Lucky']},
-                                         'lvl': {rows[0]['lvl']},
-                                         'xp': {rows[0]['xp']},
-                                         })
         for line in rows:
             if pet.name in line:
                 continue
@@ -71,17 +56,17 @@ def remove_pet(pet):
                 fieldnames = ['Name', 'Species', 'Age(years)', 'Hunger', 'Happiness', 'Energy', 'Health', 'Healthy', 'Lucky', 'lvl', 'xp']
                 reader = csv.reader(csv_file)
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-                writer.writerow({'Name': {line['Name']},
-                                         'Species':{line['Species']},
-                                         'Age(years)':{line['Age(years)']},
-                                         'Hunger': {line['Hunger']},
-                                         'Happiness': {line['Happiness']},
-                                         'Energy':{line['Energy']},
-                                         'Health': {line['Health']},
-                                         'Healthy': {line['Healthy']},
-                                         'Lucky': {line['Lucky']},
-                                         'lvl': {line['lvl']},
-                                         'xp': {line['xp']},
+                writer.writerow({'Name': pet.name,
+                                         'Species':pet.species,
+                                         'Age(Years)': pet.age,
+                                         'Hunger': pet.hunger,
+                                         'Happiness': pet.happiness,
+                                         'Energy':pet.energy,
+                                         'Health': pet.health,
+                                         'Healthy': pet.s1,
+                                         'Lucky': pet.s2,
+                                         'lvl': pet.lvl,
+                                         'xp': pet.xp,
                                          })
 
 
@@ -108,11 +93,11 @@ def select_pet():
             print(f"Level:{line['lvl']}")
     choice = input("Which pet would you like to set as main?(enter the name exactly): ")
     if choice in line['Name']:
-        num = 0
         for i, sublist in enumerate(rows):
-            num += 1
             if choice in sublist:
+                num = i
                 break
+        num = i
         pet_object = Animal(rows[num]['Name'],rows[num]['Species'],rows[num]['Age(years)'],rows[num]['Hunger'],rows[num]['Happiness'],rows[num]['Energy'],rows[num]['Health'],rows[num]['Healthy'],rows[num]['Lucky'],rows[num]['lvl'],rows[num]['xp'])
         return pet_object
 
@@ -133,7 +118,7 @@ class Animal:
             self.happinesstem, self.healthtem, self.xptem = 0, 0, 0
             # When printed, the object will print all the data related to it
         def display(self):
-                print(f"""Name = {self.name}\nSpecies = {self.species}\nAge = {self.age}\nHunger = {self.hunger}%\nHappiness = {self.happiness}%\nEnergy = {self.energy}%\nHealth = {self.health}%\nLevel = {self.lvl}\nHealthy = {self.s1}\nLucky = {self.s2}""")
+                return (f"""Name = {self.name}\nSpecies = {self.species}\nAge = {self.age}\nHunger = {self.hunger}%\nHappiness = {self.happiness}%\nEnergy = {self.energy}%\nHealth = {self.health}%\nLevel = {self.lvl}\nHealthy = {self.s1}\nLucky = {self.s2}""")
             # Function for feeding
         def feed(self, food_hunger, food_happiness):
                 self.hunger += food_hunger
@@ -146,10 +131,6 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
-                if self.hunger >100:
-                    self.hunger = 100
-                if self.happiness > 100:
-                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             # Function for playing with pet
@@ -170,10 +151,6 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
-                if self.hunger >100:
-                    self.hunger = 100
-                if self.happiness > 100:
-                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             # Function for sleeping
@@ -188,10 +165,6 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
-                if self.hunger >100:
-                    self.hunger = 100
-                if self.happiness > 100:
-                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             #Function for going to the vet
@@ -209,10 +182,6 @@ class Animal:
                 self.happiness += self.happinesstem
                 self.health += self.healthtem
                 self.xp += self.xptem
-                if self.hunger >100:
-                    self.hunger = 100
-                if self.happiness > 100:
-                    self.happiness = 100
                 if self.health < 0:
                     self.health = 10
             #Function to clear a pet after it dies
@@ -231,16 +200,14 @@ class Animal:
                     self.death()
                 if self.hunger == 0:
                     self.health -= 10
-                else:
-                    self.hunger -= 10
                 if self.happiness == 0:
                     self.health -= 10
-                else:
-                    self.happiness -= 10
                 if self.energy == 0:
                     self.health -= 10
-                else:
-                    self.energy -= 10
+                self.happinesstem, self.healthtem, self.xptem = random_event(self.s1,self.s2,self.name)
+                self.happiness += self.happinesstem
+                self.health += self.healthtem
+                self.xp += self.xptem
                 if self.health < 0:
                     self.health = 0
 
@@ -249,7 +216,7 @@ class Animal:
 def create_pet():
     name = input("What is the pets name?\n")
     while True:
-        species = input("What species?\n1.Dog\n2.Cat\n3.Fish\n4.Hampster\n5.Bird\n")
+        species = input("What species?\n1.Dog\n2.Cat\n3.Fish\n4.Hampster\n5.Bird")
         if species == '1':
             species = "Dog"
             break
