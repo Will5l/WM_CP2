@@ -1,0 +1,2 @@
+projecttext = "This project is a finacial calculator that can do various things, such as budgeting,\n calculate compound interest, tipping amount, and more. This project helped me:\nLearn to use functions effectivly\nSetup a main area where all the functions are called"
+    desc = tk.Label(root, text=projecttext).pack()
